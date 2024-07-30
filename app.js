@@ -8,6 +8,7 @@ import mongoose from "mongoose";
 // Configure CORS
 const corsOptions = {
   origin: "https://ajblogs.vercel.app",
+  methods: ["GET", "POST", "PUT", "DELETE"], // Add allowed methods here
   optionsSuccessStatus: 200,
   credentials: true,
 };
