@@ -7,7 +7,7 @@ import mongoose from "mongoose";
 
 // Configure CORS
 const corsOptions = {
-  origin: "https://deploy-mern-1whq.vercel.app",
+  origin: "https://ajblogs.vercel.app",
   optionsSuccessStatus: 200,
   credentials: true,
 };
