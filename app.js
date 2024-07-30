@@ -20,6 +20,7 @@ app.use(cors(corsOptions));
 app.use(express.json())
 app.use(router);
 app.use(express.static("./uploads"));
+app.options('*', cors(corsOptions));
 
 app.get("/", checkUser, (req, res) => {
   const username = res.locals.username;
