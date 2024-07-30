@@ -7,9 +7,8 @@ import mongoose from "mongoose";
 
 // Configure CORS
 const corsOptions = {
-  origin: "https://ajblogs.vercel.app",
+  origin: "https://ajblogs.vercel.app/",
   methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
-  allowedHeaders: ["Content-Type", "Authorization"], // Specify allowed headers
   optionsSuccessStatus: 200, // Some legacy browsers choke on 204
   credentials: true, // Allow credentials (cookies, authorization headers, etc.)
 };
