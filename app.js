@@ -2,15 +2,14 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import router from "./routes/router.js";
-import bodyParser from "body-parser";
 import { checkUser } from "./middleware/auth.js";
 import mongoose from "mongoose";
 
 // Configure CORS
 const corsOptions = {
-  origin: "http://localhost:5173", // Allow this origin
-  optionsSuccessStatus: 200, // For legacy browser support
-  credentials: true, // Allow credentials (cookies)
+  origin: "https://deploy-mern-1whq.vercel.app",
+  optionsSuccessStatus: 200,
+  credentials: true,
 };
 
 dotenv.config();
