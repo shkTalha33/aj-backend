@@ -6,11 +6,18 @@ import bodyParser from "body-parser";
 import { checkUser } from "./middleware/auth.js";
 import mongoose from "mongoose";
 
+// Configure CORS
+const corsOptions = {
+  origin: "http://localhost:5173", // Allow this origin
+  optionsSuccessStatus: 200, // For legacy browser support
+  credentials: true, // Allow credentials (cookies)
+};
+
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8000;
-app.use(cors());
-app.use(bodyParser.json())
+app.use(cors(corsOptions));
+app.use(express.json())
 app.use(router);
 app.use(express.static("./uploads"));
 
