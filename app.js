@@ -5,9 +5,8 @@ import router from "./routes/router.js";
 import { checkUser } from "./middleware/auth.js";
 import mongoose from "mongoose";
 
-// Configure CORS
 const corsOptions = {
-  origin: ["https://ajblogs.vercel.app"],
+  origin: ["https://ajblogs.vercel.app", "https://www.theskblogs.com", "https://theskblogs.com"],
   methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
   optionsSuccessStatus: 200, // Some legacy browsers choke on 204
   credentials: true, // Allow credentials (cookies, authorization headers, etc.)
