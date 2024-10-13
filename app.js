@@ -25,7 +25,7 @@ app.options('*', cors(corsOptions));
 app.get("/", checkUser, (req, res) => {
   const username = res.locals.username;
   const response = {
-    message: "Welcome to Blog-Tech!",
+    message: "Welcome to SK-Blogs!",
     isLogedin: username ? true : false,
   };
   if (username) {
