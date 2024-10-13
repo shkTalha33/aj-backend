@@ -5,18 +5,19 @@ import router from "./routes/router.js";
 import { checkUser } from "./middleware/auth.js";
 import mongoose from "mongoose";
 
-const corsOptions = {
-  origin: ["https://www.theskblogs.com", "https://theskblogs.com"],
-  methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
-  optionsSuccessStatus: 200, // Some legacy browsers choke on 204
-  credentials: true, // Allow credentials (cookies, authorization headers, etc.)
-};
+// const corsOptions = {
+//   origin: ["https://www.theskblogs.com", "https://theskblogs.com"],
+//   methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
+//   optionsSuccessStatus: 200, // Some legacy browsers choke on 204
+//   credentials: true, // Allow credentials (cookies, authorization headers, etc.)
+// };
 
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8000;
+app.use(cors());
 app.use(cors(corsOptions));
-app.use(express.json())
+// app.use(express.json())
 app.use(router);
 app.use(express.static("./uploads"));
 app.options('*', cors(corsOptions));
