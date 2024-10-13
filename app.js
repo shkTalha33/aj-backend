@@ -1,48 +1,53 @@
 import express from "express";
-import dotenv from "dotenv";
 import cors from "cors";
+import dotenv from "dotenv";
 import router from "./routes/router.js";
-import { checkUser } from "./middleware/auth.js";
 import mongoose from "mongoose";
+import { checkUser } from "./middleware/auth.js";
 
-// const corsOptions = {
-//   origin: ["https://www.theskblogs.com", "https://theskblogs.com"],
-//   methods: ["GET", "POST", "PUT", "DELETE"], // Specify allowed methods
-//   optionsSuccessStatus: 200, // Some legacy browsers choke on 204
-//   credentials: true, // Allow credentials (cookies, authorization headers, etc.)
-// };
+// Define the allowed origins and CORS options
+const corsOptions = {
+  origin: ["https://skblogs-33.vercel.app", "https://www.theskblogs.com", "https://theskblogs.com"],
+  methods: ["GET", "POST", "PUT", "DELETE"], // Allow these HTTP methods
+  credentials: true, // Allow credentials like cookies or authorization headers
+  optionsSuccessStatus: 200, // Handle successful OPTIONS preflight requests
+};
 
 dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 8000;
-app.use(cors());
+
+// Apply CORS middleware to all routes
 app.use(cors(corsOptions));
-// app.use(express.json())
+
+// Define your routes and middleware
+app.use(express.json());
 app.use(router);
 app.use(express.static("./uploads"));
+
+// Handle the preflight OPTIONS request
 app.options('*', cors(corsOptions));
 
 app.get("/", checkUser, (req, res) => {
   const username = res.locals.username;
-  const response = {
+  res.status(200).json({
     message: "Welcome to SK-Blogs!",
-    isLogedin: username ? true : false,
-  };
-  if (username) {
-    response.username = username;
-  }
-  res.status(200).json(response);
+    isLogedin: !!username,
+    ...(username && { username }),
+  });
 });
 
+// Connect to MongoDB and start the server
 const connectDB = async () => {
   try {
     await mongoose.connect(process.env.URI);
-    console.log("connected to database successfully.");
+    console.log("Connected to database successfully.");
     app.listen(PORT, () => {
-      console.log("Server is started");
+      console.log(`Server is running on port ${PORT}`);
     });
   } catch (error) {
     console.log(error);
   }
 };
+
 connectDB();
